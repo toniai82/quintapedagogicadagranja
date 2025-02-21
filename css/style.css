@@ -1,0 +1,628 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth; /* Transição suave ao clicar em links */
+}
+
+body {
+  font-family: 'helvetica neue', sans-serif;
+  background-color: #f1faee;
+}
+
+/* ------------------- CABEÇALHO ------------------- */
+.header {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo */
+  align-items: center;
+  background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'), #3a5a40;
+  background-blend-mode: multiply;
+  padding: 22px 30px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  gap: 50px; /* Espaço entre o logotipo e o menu */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 90px; /* Aumentado para dar mais destaque */
+  width: auto;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center; /* Centraliza o menu */
+  align-items: center;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: rgb(249, 246, 246);
+  font-size: 20px;
+  padding: 10px 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-links li a {
+  display: inline-block; /* Garante que o link possa ser transformado */
+  transition: transform 0.3s ease, color 0.3s ease; /* Animação suave */
+}
+
+.nav-links li a:hover {
+  transform: scale(1.2); /* Evita exagero no zoom */
+  color: #84a98c; /* Cor destacada */
+}
+
+/* Realçar o link da página ativa */
+.nav-links li a.active {
+  font-weight: bold;
+  color: white; /* Cor diferente para destacar */
+  border-bottom: 2px solid #85c226;
+}
+
+/* Menu Responsivo */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+}
+
+/* ------------------- CONTEÚDO PRINCIPAL ------------------- */
+main {
+  padding: 140px 20px 20px;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+/* ------------------- FICHEIRO SOBRE ------------------- */
+.sobre-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.sobre-img img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+  left: -60px; /* Move a imagem para a esquerda */
+  transition: transform 0.5s ease; /* Transição suave */
+}
+
+.sobre-img img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+}
+
+.sobre-texto {
+  flex: 1;
+  margin-left: 40px;
+}
+
+h2 {
+  font-family: 'helvetica neue', sans-serif;
+  font-size: 35px;
+  color:#3a5a40;
+}
+
+.sobre-texto p {
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+
+/* ------------------- SLIDESHOW ------------------- */
+/* Estilizando o slideshow */
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.slides-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Camada de transparência sobre as imagens */
+.slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Transparência escura */
+}
+
+/* Texto sobre o banner */
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 2.9em;
+  font-weight: bold;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Botões de navegação */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* ------------------- FICHEIRO ATIVIDADES ------------------- */
+#atividades {
+  background-color: #dad7cd(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 40px auto;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.activities-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.activity-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.activity-shadow {
+  position: absolute;
+  inset: 0;
+  transform: rotate(3deg);
+}
+
+.activity-content {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ajusta o espaçamento entre os elementos */
+  gap: 1rem; /* Reduz o espaçamento */
+  width: 400px; /* Define uma largura fixa para manter o mesmo tamanho */
+  min-height: 100px; /* Garante que todas as caixas tenham pelo menos a mesma altura */
+}
+
+.activity-number {
+  background-color: #e5e7eb; /* Cor de fundo */
+  padding: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: 4px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-number i {
+  font-size: 2rem; /* Ajusta o tamanho do ícone */
+}
+
+.activity-text h2 {
+  font-size: 1.500rem;
+  font-weight: 600;
+  color: black;
+}
+
+/* Cores específicas para cada caixa */
+.activity-yellow .activity-shadow,
+.activity-yellow .activity-content {
+  background-color: #facc15; /* yellow-500 */
+}
+
+.activity-yellow .activity-number {
+  border-color: #a16207; /* yellow-700 */
+}
+
+.activity-red .activity-shadow,
+.activity-red .activity-content {
+  background-color: #ef4444; /* red-500 */
+}
+
+.activity-red .activity-number {
+  border-color: #7f1d1d; /* red-700 */
+}
+
+.activity-teal .activity-shadow,
+.activity-teal .activity-content {
+  background-color: #3498db; /* teal-500 */
+}
+
+.activity-teal .activity-number {
+  border-color: #064b78; /* teal-700 */
+}
+
+.activity-pink .activity-shadow,
+.activity-pink .activity-content {
+  background-color: #85c227; /* pink-500 */
+}
+
+.activity-pink .activity-number {
+  border-color: #477008; /* pink-700 */
+}
+
+
+/* ------------------- RESPONSIVIDADE ------------------- */
+@media (max-width: 768px) {
+  .navbar ul {
+      display: none;
+      flex-direction: column;
+      background-color: #066937;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+  }
+
+  .navbar ul.active {
+      display: flex;
+  }
+
+  .menu-toggle {
+      display: block;
+  }
+
+  .footer-container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .slideshow-container {
+      height: 60vh;
+  }
+}
+
+/*--------------- Estilos do Ovo -------------*/
+.ovo {
+  position: fixed;
+  top: -100px; /* Começa fora da tela */
+  right: 20px;
+  width: 320px; /* Ajusta conforme o tamanho da imagem */
+  height: 320px; /* Ajusta conforme o tamanho da imagem */
+  background: url('../img/persona_vector.png') no-repeat center/contain;
+  background-size: contain; /* Ajusta o tamanho da imagem */
+  border-radius: 0; /* Remove bordas arredondadas */
+  z-index: 1002;
+  animation: cairOvo 3s forwards;
+}
+
+@keyframes cairOvo {
+  0% {
+    top: -100px;
+    right: 20px;
+    transform: rotate(0deg); /* Começa sem rotação */
+  }
+  100% {
+    top: 55%;
+    right: -50px; /* Mantém no canto direito */
+    transform: rotate(720deg); /* Roda 2 voltas completas */
+  }
+}
+
+/* POPUP do ovo */
+#popup {
+  position: fixed;
+  bottom: 280px; /* Ajusta conforme necessário */
+  right: 110px;
+  width: 240px; /* Ajusta largura */
+  background: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente */
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, bottom 0.4s ease-in-out;
+  text-align: center;
+  z-index: 1002;
+  font-size: 19px;
+}
+
+/* Cauda do balão de fala */
+#popup::after {
+  content: "";
+  position: absolute;
+  bottom: -17px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Botões do pop-up */
+#popup .popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#popup button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #f57c00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+#popup button:hover {
+  background-color: #b55f08;
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+}
+
+.fechar:hover {
+  color: red;
+}
+/*------------------------------------------------------------------------*/
+
+/* MOLDURAS ATIVIDADES*/
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: black;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 300px;
+  text-align: center;
+}
+
+.image-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #84a98c;
+  margin: 0 auto;
+}
+
+.img1 {
+  border-color: #facc15; 
+}
+
+.img2 {
+  border-color: #ef4444; 
+}
+
+.img3 {
+  border-color: #3498db;
+}
+
+.img4 {
+  border-color: #85c227; 
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-container:hover img {
+  transform: scale(1.2);
+}
+.bar-bar {
+  background-color: #3a5a40;
+  height: 13px;
+  margin-top: 20px;
+}
+/*---------------------------------------------------------------------*/
+
+/* ------------------- RODAPÉ ------------------- */
+.footer {
+  background-color: #344e41;
+  color: white;
+  padding: 20px 10px; /* Reduzido para um rodapé mais compacto */
+  text-align: center;
+  font-size: 0.9rem;
+}
+.footer-container {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo */
+  gap: 50px; /* Espaço entre as colunas */
+  align-items: flex-start; /* Alinha as colunas no topo para manter os títulos alinhados */
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+  color: white;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  text-align: center; /* Centraliza o texto dentro das colunas */
+}
+
+.footer-column h3 {
+  margin-bottom: 10px;
+  font-size: 0.9rem; /* Aumentado para melhorar a visibilidade */
+  text-transform: uppercase; /* Torna os títulos mais destacados */
+  letter-spacing: 1px; /* Aumenta o espaçamento entre as letras */
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #d4d4d4;
+}
+
+/* Redes sociais no rodapé */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center; /* Centraliza os ícones */
+}
+
+.social-icons a {
+  color: white;
+  font-size: 2.0rem;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.5);
+}
+
+.footer-bottom {
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 5px;
+  font-size: 0.8rem;
+  text-align: center; /* Centraliza o texto no rodapé inferior */
+}
+/*-------------------------------------------------------------------------------------*/
+/*FICHEIRO DESCOBRIR E BRINCAR*/
+.container-descobrir {
+  padding: 20px;
+}
+
+.cards-descobrir {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-descobrir {
+  width: 300px;
+  text-align: center;
+}
+
+.image-container-descobrir {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+.image-container-descobrir img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-container-descobrir:hover img {
+  transform: scale(1.2);
+}
+
+
+
+

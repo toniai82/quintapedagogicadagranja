@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre - Quinta da Granja</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="atividades.html">Atividades</a></li>
+        <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="contacto.html">Contatos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="sobre" class="sobre-container">
+      <div class="sobre-img">
+        <img src="img/003.jpg" alt="Imagem da Quinta da Granja">
+      </div>
+      <div class="sobre-texto">
+        <h2>A Quinta</h2>
+        <br><br>
+        <p>A Quinta da Granja nasceu de um sonho partilhado por Madalena, professora de artes plásticas, e Pedro, formado em gestão agrícola. Inspirados pela paixão pela natureza e pela vontade de aproximar as crianças do mundo rural, decidiram transformar uma quinta num espaço pedagógico único, onde os mais novos pudessem vivenciar experiências inesquecíveis.</p>
+
+      <p>Com um ambiente familiar e acolhedor, a quinta foi cuidadosamente planeada para recriar a ligação perdida entre as crianças da cidade e o campo. Madalena e Pedro perceberam que, ao longo das gerações, muitas destas experiências – como brincar com os animais, explorar a natureza e aprender sobre agricultura – foram ficando para trás. Queriam devolver às crianças a oportunidade de sentir, descobrir e aprender com a terra, os animais e o ambiente rural.</p>
+
+      <p>Através da sua experiência em gestão e com uma visão criativa e educativa, ambos reconstruíram os jardins e os espaços da quinta, transformando-a numa verdadeira sala de aula ao ar livre. Aqui, cada visita é uma oportunidade para aprender, explorar e criar memórias que duram uma vida.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Localização</h3>
+        <p>📍 Quinta da Granja</p>
+        <p> R. Dom Carlos Mascarenhas, À-dos-Cãos, Loures, 2670-341, Portugal.</p>
+       <p>GPS - N38º50'35" W9º12'55"</p>
+    </div>
+      <div class="footer-column">
+        <h3>Contatos</h3>
+        <p>📧 Email: quintadagranja@gmail.com</p>
+        <p>📞 Telefone: +35 927 416 138</p>
+      </div>
+      <div class="footer-column social">
+        <h3>Redes Sociais</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Quinta da Granja. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<!----LINHAS Botões Menu---->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  let currentPage = window.location.pathname.split("/").pop();
+
+  let menuLinks = document.querySelectorAll(".nav-links li a");
+
+  menuLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>

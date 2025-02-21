@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorir com Sons</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
+        </div>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="atividades.html">Atividades</a></li>
+                <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+                <li><a href="galeria.html">Galeria</a></li>
+                <li><a href="contacto.html">Contatos</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <h1>Colorir com Sons</h1>
+        <p>Escolhe uma cor e pinta o animal! Clica no botão de som para ouvir o animal.</p>
+        
+        <div class="navegacao">
+            <button class="prev" onclick="mudarDesenho(-1)">&#10094;</button>
+            <canvas id="canvas" width="800" height="600"></canvas>
+            <button class="next" onclick="mudarDesenho(1)">&#10095;</button>
+        </div>
+        
+        <div class="ferramentas">
+            <input type="color" id="corSelecionada" value="#ff0000">
+            <button onclick="limparDesenho()">🧽 Apagar</button>
+            <button onclick="tocarSom()">🔊 Ouvir Som</button>
+        </div>
+        
+        <img id="desenhoAnimal" src="img/galinha_pintos.png" alt="Galinha com Pintos" style="display:none;">
+    </main>
+
+     <!-- Rodapé -->
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Localização</h3>
+        <p>📍 Quinta da Granja, À-dos-Cãos, Loures, Portugal.</p>
+        <p>GPS - N38º50'35" W9º12'55"</p>
+      </div>
+      <div class="footer-column">
+        <h3>Contatos</h3>
+        <p>📧 Email: quintadagranja@gmail.com</p>
+        <p>📞 Telefone: +35 927 416 138</p>
+      </div>
+      <div class="footer-column social">
+        <h3>Redes Sociais</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Quinta da Granja. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
+    
+    <script>
+        const desenhos = [
+            { img: "img/galinha_pintos.png", som: "sounds/galinha_pintos.mp3" },
+            { img: "img/pato.png", som: "sounds/pato.mp3" },
+            { img: "img/cabra.png", som: "sounds/cabra.mp3" },
+            { img: "img/porco.png", som: "sounds/porco.mp3" }
+        ];
+
+        let desenhoAtual = 0;
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const imgElement = document.getElementById("desenhoAnimal");
+        let audioElement = new Audio();
+        let somTocando = false;
+        let desenhando = false;
+        let corAtual = "#ff0000";
+
+        function carregarImagem() {
+            imgElement.src = desenhos[desenhoAtual].img;
+            audioElement.src = desenhos[desenhoAtual].som;
+            imgElement.onload = function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                let proporcao = Math.min(canvas.width / imgElement.width, canvas.height / imgElement.height);
+                let novaLargura = imgElement.width * proporcao;
+                let novaAltura = imgElement.height * proporcao;
+                let x = (canvas.width - novaLargura) / 2;
+                let y = (canvas.height - novaAltura) / 2;
+                
+                ctx.drawImage(imgElement, x, y, novaLargura, novaAltura);
+            };
+        }
+
+        function mudarDesenho(direcao) {
+            desenhoAtual = (desenhoAtual + direcao + desenhos.length) % desenhos.length;
+            carregarImagem();
+        }
+
+        function tocarSom() {
+            if (somTocando) {
+                audioElement.pause();
+                audioElement.currentTime = 0;
+                somTocando = false;
+            } else {
+                audioElement.loop = true;
+                audioElement.play();
+                somTocando = true;
+            }
+        }
+
+        document.getElementById("corSelecionada").addEventListener("input", (e) => {
+            corAtual = e.target.value;
+        });
+
+        canvas.addEventListener("mousedown", () => desenhando = true);
+        canvas.addEventListener("mouseup", () => desenhando = false);
+        canvas.addEventListener("mousemove", desenhar);
+
+        function desenhar(event) {
+            if (!desenhando) return;
+            ctx.fillStyle = corAtual;
+            ctx.beginPath();
+            ctx.arc(event.offsetX, event.offsetY, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function limparDesenho() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            carregarImagem();
+        }
+
+        window.onload = carregarImagem;
+    </script>
+

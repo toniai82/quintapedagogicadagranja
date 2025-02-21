@@ -1,0 +1,59 @@
+Briefing para o Site da Quinta da Granja
+
+A Quinta da Granja
+Localizada em À-dos-Cãos, Loures (2670-341, Portugal), com coordenadas GPS N38º50'35" W9º12'55", a Quinta da Granja é um espaço pedagógico dedicado a aproximar as crianças da natureza, dos animais e da agricultura. Criada por Madalena, professora de artes plásticas, e Pedro, formado em gestão agrícola, a quinta nasceu de um sonho partilhado de proporcionar experiências únicas e educativas às novas gerações. Inspirados pela ligação com o campo e pelo desejo de recriar as experiências que outrora eram comuns, Madalena e Pedro transformaram um espaço simples numa verdadeira sala de aula ao ar livre, onde cada visita é uma oportunidade de aprendizagem e criação de memórias inesquecíveis.
+
+A quinta transmite uma forte mensagem de reconexão com o mundo rural e de valorização da educação prática em ambiente natural.
+
+Objetivos do Site
+O principal objetivo do site é promover as atividades da Quinta da Granja, especialmente as visitas escolares, workshops e acampamentos, além de fornecer informações claras e atrativas ao público-alvo, que inclui escolas, famílias, entidades educativas e crianças curiosas sobre a natureza, animais e agricultura. Caso haja tempo, planeia-se também implementar um jogo interativo para enriquecer a experiência digital.
+
+Serviços e Atividades
+A Quinta da Granja oferece:
+
+    Visitas escolares, que são a principal atração e funcionam mediante marcação prévia.
+    Acampamentos, uma experiência sazonal que proporciona contacto prolongado com o ambiente rural.
+    Workshops variados, como agricultura biológica, microvegetais e pintura.
+
+O site deverá dar destaque a esses serviços e enfatizar as atividades sazonais, como os acampamentos e os workshops, que estão em desenvolvimento.
+
+Horário de Funcionamento
+
+    Visitas escolares: Segunda a sexta-feira, das 9h às 15h.
+    Acampamentos: Sextas-feiras, das 18h às 11h de sábado.
+    Workshops: Planeia-se oferecer aos fins de semana, com horários variáveis – longos (10h às 16h) ou curtos (14h às 18h).
+
+A quinta está aberta exclusivamente para visitas agendadas e encerra nos fins de semana, com exceção das atividades mencionadas.
+
+Conteúdo do Site
+O site incluirá:
+
+    Uma descrição geral da quinta.
+    Galeria de fotos.
+    Depoimentos de visitantes.
+    Informações para professores (como as visitas se enquadram nos referenciais educativos).
+    Conteúdos sobre animais, natureza e agricultura.
+    Mapas da quinta e orientações de como chegar ao local.
+
+Existem fotografias disponíveis, que posteriormente seram fornecidas e haverá integração com as redes sociais (Instagram e Facebook) para maximizar a interação com o público.
+
+Design e Estilo
+O visual do site deverá refletir um estilo pedagógico e natural, com elementos que remetem à vida rural, aos animais e à natureza. Apesar de ainda não haver referências específicas de design, está em análise a pesquisa de inspirações. Um logótipo será fornecido para complementar o branding do site.
+
+Funcionalidades do Site
+As funcionalidades essenciais incluem:
+
+    Divulgação e apresentação geral do espaço.
+    Formulário de contacto.
+    Galeria de fotos.
+    Calendário de eventos.
+    Jogos educativos (caso implementados).
+    Área dedicada a professores com conteúdos educativos relevantes.
+    Mapas interativos com localização da quinta e coordenadas GPS.
+    Destaque para informações de contacto (telefone e email).
+
+Gestão e Atualização
+A gestão do site ficará a cargo de quem dos criadores. Estima-se que o conteúdo seja atualizado uma vez por mês, mas a frequência pode variar conforme o dinamismo das atividades. Idealmente, haverão atualizações trimestrais.
+
+Testemunhos e Parcerias
+O site incluirá testemunhos de visitantes para reforçar a credibilidade e o impacto da quinta. Não existem parcerias oficiais a mencionar no momento.

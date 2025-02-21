@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria - Quinta da Granja</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 20px;
+    }
+    .galeria-item {
+      overflow: hidden;
+      border-radius: 8px;
+      position: relative;
+      transition: transform 0.3s ease-in-out;
+    }
+    .galeria-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      transition: transform 0.3s ease-in-out;
+    }
+    .grande {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .pequena {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    /* Efeito de zoom */
+    .galeria-item:hover img {
+      transform: scale(1.1);
+    }
+    h2 {
+      font-family: 'helvetica neue', sans-serif;
+      font-size: 35px;
+      color:#3a5a40;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="atividades.html">Atividades</a></li>
+        <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="contacto.html">Contatos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <br>
+    <section id="galeria">
+      <h2>Imagens da Quinta</h2>
+      <p>Descubra os momentos especiais vividos na Quinta da Granja.</p>
+      <br>
+      <div class="galeria-grid">
+        <div class="galeria-item grande"><img src="img/meme.jpg" alt="Momento divertido na Quinta"></div>
+        <div class="galeria-item pequena"><img src="img/galinha.jpg" alt="Galinha na Quinta"></div>
+        <div class="galeria-item pequena"><img src="img/ponei.jpg" alt="Passeio de Pónei"></div>
+      </div>
+    </section>
+  </main>
+
+ <!-- Rodapé -->
+ <footer class="footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Localização</h3>
+      <p>📍 Quinta da Granja</p>
+      <p> R. Dom Carlos Mascarenhas, À-dos-Cãos, Loures, 2670-341, Portugal.</p>
+     <p>GPS - N38º50'35" W9º12'55"</p>
+  </div>
+    <div class="footer-column">
+      <h3>Contatos</h3>
+      <p>📧 Email: quintadagranja@gmail.com</p>
+      <p>📞 Telefone: +35 927 416 138</p>
+    </div>
+    <div class="footer-column social">
+      <h3>Redes Sociais</h3>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 Quinta da Granja. Todos os direitos reservados.</p>
+  </div>
+</footer>
+</body>
+</html>
+
+  <!----LINHAS Botões Menu---->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    let currentPage = window.location.pathname.split("/").pop();
+  
+    let menuLinks = document.querySelectorAll(".nav-links li a");
+  
+    menuLinks.forEach(link => {
+      if (link.getAttribute("href") === currentPage) {
+        link.classList.add("active");
+      }
+    });
+  });
+  </script>
+
+

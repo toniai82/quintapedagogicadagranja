@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Descobrir e Brincar - Quinta da Granja</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<style>
+  h1 {
+  font-family: 'helvetica neue', sans-serif;
+  font-size: 35px;
+  color:#3a5a40;
+}
+h2 {
+  font-size: 25px;
+  font-weight: bold;
+  color: black;
+}
+.container-descobrir p {
+  font-size: 18px;
+}
+</style>
+<body>
+  <body>
+    <header class="header">
+      <div class="logo-container">
+        <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
+      </div>
+      <nav class="navbar">
+        <ul class="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="atividades.html">Atividades</a></li>
+          <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+          <li><a href="galeria.html">Galeria</a></li>
+          <li><a href="contacto.html">Contatos</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>  
+
+    <main>
+      <div class="container-descobrir">
+        <h1>Diversão Garantida</h1>
+        <br>
+        <br>
+        <div class="cards-descobrir">
+            <div class="card-descobrir" onclick="window.location.href='curiosidades.html'">
+                <div class="image-container-descobrir img1-descobrir">
+                    <img src="img/jogo_curiosidade.png" alt="visita">
+                </div>
+                <h2>Curiosidades</h2>
+                <p>Aprende Curiosidades incríveis sobre os animais da quinta.</p>
+            </div>
+            <div class="card-descobrir" onclick="window.location.href='colorir.html'">
+                <div class="image-container-descobrir img2-descobrir">
+                    <img src="img/jogo_pintor.png" alt="Campismo">
+                </div>
+                <h2>Colorir e ouvir</h2>
+                <p> Pinta os animais e descobre os sons que eles fazem.</p>
+            </div>
+            <div class="card-descobrir" onclick="window.location.href='adivinha.html'">
+                <div class="image-container-descobrir img3-descobrir">
+                    <img src="img/jogo_sombra.png" alt="workshop">
+                </div>
+                <h2>Jogo das Sombras</h2>
+                <p>Tenta adivinhar os animais através das sombras!</p>
+            </div>
+            <div class="card-descobrir" onclick="window.location.href='descobrirbrincar.html'">
+              <div class="image-container-descobrir img4-descobrir">
+                  <img src="img/agricultor1.png" alt="Experiencias">
+              </div>
+              <h2>Experiências Agrícolas</h2>
+              <p>como fazer uma horta</p>
+          </div>
+        </div>
+      </div>
+  </main>  
+  
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Localização</h3>
+        <p>📍 Quinta da Granja</p>
+         <p> R. Dom Carlos Mascarenhas, À-dos-Cãos, Loures, 2670-341, Portugal.</p>
+        <p>GPS - N38º50'35" W9º12'55"</p>
+      </div>
+      <div class="footer-column">
+        <h3>Contatos</h3>
+        <p>📧 Email: quintadagranja@gmail.com</p>
+        <p>📞 Telefone: +35 927 416 138</p>
+      </div>
+      <div class="footer-column social">
+        <h3>Redes Sociais</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Quinta da Granja. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+<!----LINHAS Botões Menu---->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  let currentPage = window.location.pathname.split("/").pop();
+
+  let menuLinks = document.querySelectorAll(".nav-links li a");
+
+  menuLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+

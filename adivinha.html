@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atividades - Quinta da Granja</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+        .container {
+            margin-top: 50px;
+        }
+        #shadow-img {
+            width: 300px; /* Aumenta a largura */
+            height: 300px; /* Aumenta a altura */
+            margin: 20px auto;
+            border-radius: 10px;
+            background-size: contain; /* Garante que a imagem não fique cortada */
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .options button {
+            display: inline-block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .correct {
+            background-color: #4CAF50;
+            color: white;
+            animation: pop 0.3s ease-in-out;
+        }
+
+        .wrong {
+            background-color: #fa2e00;
+            color: white;
+            animation: shake 0.3s ease-in-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        #timer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    position: relative;
+  }
+
+  #timer-bar {
+    width: 100%;
+    max-width: 300px;
+    height: 15px;
+    background-color: #f39c12;
+    border-radius: 10px;
+    transition: width 1s linear, background-color 0.5s ease;
+  }
+    </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo-container">
+      <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="atividades.html">Atividades</a></li>
+        <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="contacto.html">Contatos</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="container">
+        <h2>Jogo das Sombras</h2>
+        <br>
+        <div id="timer-container">
+            <div id="timer-bar"></div>
+        </div>  
+        <p id="timer">Tempo restante: <span id="time">15</span>s</p>                
+        <p>Pontuação: <span id="score">0</span></p>
+        <div id="shadow-img"></div>
+        <div class="options">
+            <button onclick="checkAnswer(this)"></button>
+            <button onclick="checkAnswer(this)"></button>
+            <button onclick="checkAnswer(this)"></button>
+        </div>
+    </div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 15;
+        let timer;
+        let animals = [
+            {name: "Vaca", image: "img/vaca_sombra.png"},
+            {name: "Pato", image: "img/pato_sombra.png"},
+            {name: "Coelho", image: "img/coelho_sombra.png"},
+            {name: "Galinha", image: "img/galinha_sombra.png"},
+            {name: "Ovelha", image: "img/ovelha_sombra.png"},
+            {name: "Cabra", image: "img/cabra_sombra.png"},
+            {name: "Porco", image: "img/porco_sombra.png"},
+            {name: "Cavalo", image: "img/cavalo_sombra.png"},
+            {name: "Cisne", image: "img/cisne_sombra.png"},
+            {name: "Burro", image: "img/burro_sombra.png"}
+        ];
+        let currentAnimalIndex = 0;
+
+        function shuffle(array) {
+            return array.sort(() => Math.random() - 0.5);
+        }
+
+        function loadQuestion() {
+            let currentAnimal = animals[currentAnimalIndex];
+            document.getElementById("shadow-img").style.backgroundImage = `url('${currentAnimal.image}')`;
+            
+            let options = [currentAnimal.name];
+            while (options.length < 3) {
+                let randomAnimal = animals[Math.floor(Math.random() * animals.length)].name;
+                if (!options.includes(randomAnimal)) {
+                    options.push(randomAnimal);
+                }
+            }
+            
+            options = shuffle(options);
+            let buttons = document.querySelectorAll(".options button");
+            buttons.forEach((btn, index) => {
+                btn.innerText = options[index];
+                btn.setAttribute("data-correct", options[index] === currentAnimal.name);
+            });
+        }
+
+        function checkAnswer(button) {
+            clearInterval(timer);
+            let isCorrect = button.getAttribute("data-correct") === "true";
+            if (isCorrect) {
+                score += 10;
+                button.classList.add("correct");
+            } else {
+                score -= 5;
+                button.classList.add("wrong");
+            }
+            document.getElementById("score").innerText = score;
+            setTimeout(nextQuestion, 1000);
+        }
+
+        function nextQuestion() {
+            document.querySelectorAll("button").forEach(btn => {
+                btn.classList.remove("correct", "wrong");
+            });
+            currentAnimalIndex++;
+            if (currentAnimalIndex >= animals.length) {
+                currentAnimalIndex = 0;
+                score = 0;  // Reset score
+            }
+            loadQuestion();
+            timeLeft = 15;
+            document.getElementById("time").innerText = timeLeft;
+            startTimer();
+        }
+
+        function startTimer() {
+            let timerBar = document.getElementById("timer-bar");
+            let timeDisplay = document.getElementById("time");
+            let totalTime = 15;
+            let timeLeft = totalTime;
+
+            timerBar.style.width = "100%";
+            timerBar.style.backgroundColor = "#f39c12"; // Cor inicial (laranja)
+
+            timer = setInterval(() => {
+                timeLeft--;
+                let percentage = (timeLeft / totalTime) * 100;
+                timerBar.style.width = percentage + "%";
+
+                // Muda a cor quando restam 5 segundos
+                if (timeLeft <= 5) {
+                    timerBar.style.backgroundColor = "#e74c3c"; // Vermelho
+                }
+
+                // Atualiza o tempo visível
+                timeDisplay.innerText = timeLeft;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    nextQuestion(); // Passa para a próxima pergunta
+                }
+            }, 1000);
+        }
+
+        loadQuestion();
+        startTimer();
+    </script>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>Localização</h3>
+            <p>📍 Quinta da Granja</p>
+            <p> R. Dom Carlos Mascarenhas, À-dos-Cãos, Loures, 2670-341, Portugal.</p>
+           <p>GPS - N38º50'35" W9º12'55"</p>
+        </div>
+        <div class="footer-column">
+            <h3>Contatos</h3>
+            <p>📧 Email: quintadagranja@gmail.com</p>
+            <p>📞 Telefone: +35 927 416 138</p>
+        </div>
+        <div class="footer-column social">
+            <h3>Redes Sociais</h3>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Quinta da Granja. Todos os direitos reservados.</p>
+    </div>
+</footer>
+</body>
+</html>
+<script>
+function startTimer() {
+    let timerBar = document.getElementById("timer-bar");
+    let timeDisplay = document.getElementById("time");
+    let totalTime = 15;
+    let timeLeft = totalTime;
+
+    // Inicia a barra com 100% de largura e a cor laranja
+    timerBar.style.width = "100%";
+    timerBar.style.backgroundColor = "#f39c12";
+
+    let timer = setInterval(() => {
+      timeLeft--;
+      let percentage = (timeLeft / totalTime) * 100;
+
+      // Atualiza a largura da barra conforme o tempo restante
+      timerBar.style.width = percentage + "%";
+
+      // Muda a cor para vermelho quando faltam 5 segundos ou menos
+      if (timeLeft <= 5) {
+        timerBar.style.backgroundColor = "#e74c3c"; // Vermelho
+      }
+
+      // Atualiza o tempo visível
+      timeDisplay.innerText = timeLeft;
+
+      // Quando o tempo acabar, limpa o intervalo e passa para a próxima questão
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        nextQuestion(); // Função que você já tem para ir para a próxima pergunta
+      }
+    }, 1000);
+  }
+</script>
+
+  <!----LINHAS Botões Menu---->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  let currentPage = window.location.pathname.split("/").pop();
+
+  let menuLinks = document.querySelectorAll(".nav-links li a");
+
+  menuLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>

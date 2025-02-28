@@ -1,54 +1,691 @@
-/* Estilos gerais */
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth; /* Transição suave ao clicar em links */
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
+  font-family: 'helvetica neue', sans-serif;
+  background-color: #f1faee;
 }
 
-/* Cabeçalho */
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px;
-    text-align: center;
+/* ------------------- CABEÇALHO ------------------- */
+.header {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo */
+  align-items: center;
+  background: url('https://www.transparenttextures.com/patterns/wood-pattern.png'), #3a5a40;
+  background-blend-mode: multiply;
+  padding: 22px 30px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  gap: 50px; /* Espaço entre o logotipo e o menu */
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
+.logo-container {
+  display: flex;
+  align-items: center;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 20px;
+.logo {
+  height: 90px; /* Aumentado para dar mais destaque */
+  width: auto;
 }
 
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
+.navbar {
+  display: flex;
+  justify-content: center; /* Centraliza o menu */
+  align-items: center;
 }
 
-nav ul li a:hover {
-    text-decoration: underline;
+.navbar ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin: 0;
+  padding: 0;
 }
 
-/* Layout do conteúdo */
+.nav-links li a {
+  text-decoration: none;
+  color: rgb(249, 246, 246);
+  font-size: 20px;
+  padding: 10px 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-links li a {
+  display: inline-block; /* Garante que o link possa ser transformado */
+  transition: transform 0.3s ease, color 0.3s ease; /* Animação suave */
+}
+
+.nav-links li a:hover {
+  transform: scale(1.2); /* Evita exagero no zoom */
+  color: #84a98c; /* Cor destacada */
+}
+
+/* Realçar o link da página ativa */
+.nav-links li a.active {
+  font-weight: bold;
+  color: white; /* Cor diferente para destacar */
+  border-bottom: 2px solid #85c226;
+}
+
+/* Menu Responsivo */
+.menu-toggle {
+  display: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+}
+
+/* ------------------- CONTEÚDO PRINCIPAL ------------------- */
 main {
-    padding: 20px;
-    text-align: center;
+  padding: 140px 20px 20px;
+  text-align: center;
+  font-size: 1.6rem;
 }
 
-/* Rodapé */
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+/* ------------------- FICHEIRO SOBRE ------------------- */
+.sobre-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
 }
+
+.sobre-img img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+  left: -60px; /* Move a imagem para a esquerda */
+  transition: transform 0.5s ease; /* Transição suave */
+}
+
+.sobre-img img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+}
+
+.sobre-texto {
+  flex: 1;
+  margin-left: 40px;
+  color: #333;
+}
+
+h2 {
+  font-family: 'helvetica neue', sans-serif;
+  font-size: 35px;
+  color:#3a5a40; 
+}
+
+.sobre-texto p {
+  font-size: 18px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+
+/* ------------------- SLIDESHOW ------------------- */
+/* Estilizando o slideshow */
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.slides-wrapper {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Camada de transparência sobre as imagens */
+.slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Transparência escura */
+}
+
+/* Texto sobre o banner */
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 2.9em;
+  font-weight: bold;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Botões de navegação */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/* ------------------- FICHEIRO ATIVIDADES ------------------- */
+#atividades {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 900px;
+  margin: 40px 0; /* Removido o auto para não centralizar */
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.activities-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alterado para alinhar à esquerda */
+  gap: 2rem;
+}
+
+.activity-text h2 {
+  font-size: 1.8rem; /* Tamanho do título */
+  font-weight: 600;
+  color: currentColor;
+  padding-left: 10px;
+  padding-top: 10px;
+  text-align: left; /* Alinha o título à esquerda */
+}
+
+.activity-text h2[id] {
+  scroll-margin-top: 180px; /* Ajusta a margem superior ao rolar */
+}
+
+.activities-container p {
+  margin-left: 50px; /* Move os textos das atividades para a direita */
+  font-size: 18px;
+  text-align: justify; /* Justifica o texto */
+  margin-top: -15px;
+  color: #333;
+  line-height: 1.6; /* Ajusta o espaçamento entre as linhas */
+  word-wrap: break-word; /* Quebra palavras longas, se necessário */
+  white-space: normal; /* Garante que as quebras de linha aconteçam normalmente */
+}
+
+.activity-box {
+  display: flex;
+  align-items: flex-start; /* Garantir alinhamento à esquerda */
+  gap: 1rem;
+  position: relative;
+  margin-left: 50px;
+  margin-bottom: 15px;
+}
+
+.activity-shadow {
+  position: absolute;
+  inset: 0;
+  transform: rotate(3deg);
+  border: 4px solid currentColor;
+  background: transparent;
+}
+
+.activity-content {
+  position: relative;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start; /* Garantir alinhamento interno */
+  justify-content: flex-start; /* Alinhar à esquerda */
+  gap: 1rem;
+  width: 400px;
+  min-height: 100px;
+  border: 4px solid currentColor;
+  background: transparent;
+}
+
+/* Cores específicas para cada caixa */
+.activity-yellow {
+  color: #facc15; 
+}
+
+.activity-red {
+  color: #ef4444;
+}
+
+.activity-teal {
+  color: #3498db;
+}
+
+.activity-pink {
+  color: #85c227;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+/*Fotos das atividades*/
+.activity-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 690px; /* Ajuste este valor para subir a imagem */
+  margin-left: 950px;
+  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+}
+.activity-images img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+}
+
+.activityaca-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 1920px; /* Ajuste este valor para subir a imagem */
+  margin-left: 995px;
+  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+}
+
+.activityaca-images img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+}
+/* ------------------- RESPONSIVIDADE ------------------- */
+@media (max-width: 768px) {
+  .navbar ul {
+      display: none;
+      flex-direction: column;
+      background-color: #066937;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      padding: 15px;
+  }
+
+  .navbar ul.active {
+      display: flex;
+  }
+
+  .menu-toggle {
+      display: block;
+  }
+
+  .footer-container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .slideshow-container {
+      height: 60vh;
+  }
+}
+
+/*--------------- Estilos do Ovo -------------*/
+.ovo {
+  position: fixed;
+  top: -100px; /* Começa fora da tela */
+  right: 20px;
+  width: 320px; /* Ajusta conforme o tamanho da imagem */
+  height: 320px; /* Ajusta conforme o tamanho da imagem */
+  background: url('../img/persona_vector.png') no-repeat center/contain;
+  background-size: contain; /* Ajusta o tamanho da imagem */
+  border-radius: 0; /* Remove bordas arredondadas */
+  z-index: 1002;
+  animation: cairOvo 3s forwards;
+}
+
+@keyframes cairOvo {
+  0% {
+    top: -100px;
+    right: 20px;
+    transform: rotate(0deg); /* Começa sem rotação */
+  }
+  100% {
+    top: 55%;
+    right: -50px; /* Mantém no canto direito */
+    transform: rotate(720deg); /* Roda 2 voltas completas */
+  }
+}
+
+/* POPUP do ovo */
+#popup {
+  position: fixed;
+  bottom: 280px; /* Ajusta conforme necessário */
+  right: 110px;
+  width: 240px; /* Ajusta largura */
+  background: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente */
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out, bottom 0.4s ease-in-out;
+  text-align: center;
+  z-index: 1002;
+  font-size: 19px;
+}
+
+/* Cauda do balão de fala */
+#popup::after {
+  content: "";
+  position: absolute;
+  bottom: -17px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Botões do pop-up */
+#popup .popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#popup button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #f57c00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+}
+
+#popup button:hover {
+  background-color: #b55f08;
+}
+
+.fechar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+}
+
+.fechar:hover {
+  color: red;
+}
+/*------------------------------------------------------------------------*/
+
+/* MOLDURAS ATIVIDADES*/
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: #333;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  width: 300px;
+  text-align: center;
+}
+
+.image-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #84a98c;
+  margin: 0 auto;
+}
+
+.img1 {
+  border-color: #facc15; 
+}
+
+.img2 {
+  border-color: #ef4444; 
+}
+
+.img3 {
+  border-color: #3498db;
+}
+
+.img4 {
+  border-color: #85c227; 
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-container:hover img {
+  transform: scale(1.2);
+}
+.bar-bar {
+  background-color: #3a5a40;
+  height: 13px;
+  margin-top: 20px;
+}
+/*---------------------------------------------------------------------*/
+
+/* ------------------- RODAPÉ ------------------- */
+.footer {
+  background-color: #344e41;
+  color: white;
+  padding: 20px 10px; /* Reduzido para um rodapé mais compacto */
+  text-align: center;
+  font-size: 0.9rem;
+}
+.footer-container {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo */
+  gap: 50px; /* Espaço entre as colunas */
+  align-items: flex-start; /* Alinha as colunas no topo para manter os títulos alinhados */
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: auto;
+  color: white;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+  text-align: center; /* Centraliza o texto dentro das colunas */
+}
+
+.footer-column h3 {
+  margin-bottom: 10px;
+  font-size: 0.9rem; /* Aumentado para melhorar a visibilidade */
+  text-transform: uppercase; /* Torna os títulos mais destacados */
+  letter-spacing: 1px; /* Aumenta o espaçamento entre as letras */
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: white;
+  display: block;
+  margin-bottom: 5px;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: #d4d4d4;
+}
+
+/* Redes sociais no rodapé */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center; /* Centraliza os ícones */
+}
+
+.social-icons a {
+  color: white;
+  font-size: 2.0rem;
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.5);
+}
+
+.footer-bottom {
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 5px;
+  font-size: 0.8rem;
+  text-align: center; /* Centraliza o texto no rodapé inferior */
+}
+/*-------------------------------------------------------------------------------------*/
+/*FICHEIRO DESCOBRIR E BRINCAR*/
+.container-descobrir {
+  padding: 20px;
+}
+
+.cards-descobrir {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card-descobrir {
+  width: 300px;
+  text-align: center;
+}
+
+.image-container-descobrir {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  border: 5px solid #84a98c;
+}
+
+.img1-descobrir {
+  border-color: #85c227; 
+}
+
+.img2-descobrir {
+  border-color: #dc147b;
+}
+
+.img3-descobrir {
+  border-color: #f57c00;
+}
+
+.image-container-descobrir img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-container-descobrir:hover img {
+  transform: scale(1.2);
+}
+
+/*---------------------------------------------------------------------------------*/
+/*POP-UP DESCOBRIR E BRINCAR*/
+
+   /* Estilo do fundo do pop-up */
+   .popup-overlay {
+    display: none; /* Começa escondido */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo da caixa do pop-up */
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    position: relative;
+}
+
+/* Botão de fechar */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+
+

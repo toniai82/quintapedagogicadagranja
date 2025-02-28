@@ -1,34 +1,173 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quinta da Granja</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quinta da Granja</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script defer src="js/script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
+<style> 
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+  transition: color 0.3s ease-in-out; /* Suaviza a transição de cor */
+}
+.titulo-visitas:hover {
+    color: #facc15; 
+}
+.titulo-acampamentos:hover {
+    color: #FF5733;
+}
+.titulo-workshops:hover {
+    color: #3498db; 
+}
+.titulo-experiencias:hover {
+    color: #85c227; 
+}
+</style>
 <body>
-    <header>
-        <h1>Quinta da Granja</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="actividades.html">Actividades</a></li>
-                <li><a href="sobre.html">Sobre Nós</a></li>
-                <li><a href="galeria.html">Galeria</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+  <!-- Cabeçalho -->
+  <header class="header">
+    <div class="logo-container">
+      <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="atividades.html">Atividades</a></li>
+        <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="contacto.html">Contatos</a></li>
+      </ul>
+    </nav>
+    <div class="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+  </header>
 
-    <main>
-        <section>
-            <h2>Bem-vindo à Quinta da Granja</h2>
-            <p>Descubra um espaço de aprendizagem ao ar livre para crianças e famílias.</p>
-        </section>
-    </main>
+  <div id="ovo" class="ovo"></div>
 
-    <footer>
-        <p>&copy; 2025 Quinta da Granja - Todos os direitos reservados.</p>
-    </footer>
+<!-- Pop-up atualizado com "X" para fechar -->
+<div class="popup" id="popup">
+  <span class="fechar" onclick="fecharPopup()">✖</span> <!-- Botão "X" -->
+  <br>
+  <p>Descobre os nossos jogos! 🎉</p>
+  <br>
+  <br>
+  <button onclick="window.location.href='descobrirbrincar.html'">Brincar</button>
+</div>
+
+  <!-- Slideshow -->
+<div class="slideshow-container">
+  <div class="slides-wrapper">
+    <div class="slide active">
+      <img src="img/meme.jpg" alt="Imagem 1">
+      <div class="overlay-text">Bem-vindo à Quinta da Granja!</div>
+    </div>
+    <div class="slide">
+      <img src="img/galinha.jpg" alt="Imagem 2">
+      <div class="overlay-text">Bem-vindo à Quinta da Granja!</div>
+    </div>
+    <div class="slide">
+      <img src="img/ponei.jpg" alt="Imagem 3">
+      <div class="overlay-text">Bem-vindo à Quinta da Granja!</div>
+    </div>
+  </div>
+  <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
+  <a class="next" onclick="moveSlide(1)">&#10095;</a>
+</div>
+
+<div class="container">
+  <h1>Atividades</h1>
+  <br><br>
+  <div class="cards">
+      <div class="card" onclick="window.location.href='atividades.html#visitas'">
+          <div class="image-container img1">
+              <img src="img/visita1.png" alt="visita">
+          </div>
+          <h2 class="titulo-visitas">Visitas</h2>
+          <p>Escolas e Grupos</p>
+      </div>
+      <div class="card" onclick="window.location.href='atividades.html#acampamentos'">
+          <div class="image-container img2">
+              <img src="img/campismo.png" alt="Campismo">
+          </div>
+          <h2 class="titulo-acampamentos">Acampamentos</h2>
+          <p>Grupos</p>
+      </div>
+      <div class="card" onclick="window.location.href='atividades.html#workshops'">
+          <div class="image-container img3">
+              <img src="img/workshop.png" alt="workshop">
+          </div>
+          <h2 class="titulo-workshops">Workshops&Experiências</h2>
+          <p>Natureza e Artes</p>
+      </div>
+      <div class="card" onclick="window.location.href='atividades.html#experiencias'">
+        <div class="image-container img4">
+            <img src="img/agricultor1.png" alt="Experiencias">
+        </div>
+        <h2 class="titulo-experiencias">A Quinta na Escola</h2>
+        <p>Recebe uma visita das nossas mascotes</p>
+    </div>
+  </div>
+</div>
+
+<br>
+<div class="bar-bar"></div>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Localização</h3>
+        <p>📍 Quinta da Granja</p>
+         <p> R. Dom Carlos Mascarenhas, À-dos-Cãos, Loures, 2670-341, Portugal.</p>
+        <p>GPS - N38º50'35" W9º12'55"</p>
+      </div>
+      <div class="footer-column">
+        <h3>Contatos</h3>
+        <p>📧 Email: quintadagranja@gmail.com</p>
+        <p>📞 Telefone: +35 927 416 138</p>
+      </div>
+      <div class="footer-column social">
+        <h3>Redes Sociais</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Quinta da Granja. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+  </script>
 </body>
 </html>
+
+<!----LINHAS Botões Menu---->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  let currentPage = window.location.pathname.split("/").pop();
+
+  let menuLinks = document.querySelectorAll(".nav-links li a");
+
+  menuLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
+

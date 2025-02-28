@@ -1,36 +1,219 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quinta da Granja - [Nome da Página]</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato - Quinta da Granja</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+.container {
+    display: flex;
+    flex-direction: row; /* Alinha os elementos lado a lado */
+    justify-content: space-between; /* Espaço entre os elementos */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 50px;
+    border-radius: 20px;
+    max-width: 1200px;
+    margin: auto; /* Centraliza a secção principal */
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    flex: 1; /* Faz com que ocupe o espaço da esquerda */
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
+    font-size: 23px;
+}
+
+.icon-morada {
+    background: #f57c00; 
+}
+
+.icon-contato {
+    background: #85c227; 
+}
+
+.icon-email {
+    background: #2196F3; 
+}
+
+.icon-horario {
+    background: #dc147b; 
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    text-align: left; 
+}
+
+.title {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: bold;
+    font-size: 22px;
+    text-align: left;
+    color: #333;
+}
+
+h2 {
+  font-family: 'helvetica neue', sans-serif;
+  font-size: 35px;
+  color:#3a5a40;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+.mapa {
+    flex: 1; /* Ocupa o espaço da direita */
+    display: flex;
+    justify-content: flex-end; /* Mantém o mapa do lado direito */
+}
+
+.mapa iframe {
+    width: 500px; /* Ajusta o tamanho */
+    height: 350px;
+    border-radius: 8px;
+}
+
+  </style>
 </head>
+
 <body>
-    <header>
-        <h1>Quinta da Granja</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="atividades.html">Atividades</a></li>
-                <li><a href="sobre.html">Sobre Nós</a></li>
-                <li><a href="galeria.html">Galeria</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header class="header">
+    <div class="logo-container">
+      <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
+    </div>
+    <nav class="navbar">
+      <ul class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="atividades.html">Atividades</a></li>
+        <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+        <li><a href="galeria.html">Galeria</a></li>
+        <li><a href="contacto.html">Contatos</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <section>
-            <h2>Contacto</h2>
-            <p>📞 Telefone: 123 456 789</p>
-            <p>📧 Email: info@quintadagranja.com</p>
-            <p>📍 Localização: À-dos-Cãos, Loures, Portugal</p>
-        </section>
-    </main>
+  <main>
+    <div class="titulo">
+      <br>
+      <h2>Como nos Encontrar</h2>
+    </div>
+    <br>
+    <div class="container">
+      <div class="info">
+        <div class="item">
+          <div class="icon icon-morada">
+            <i class="fas fa-home"></i>
+          </div>
+          <div class="text">
+            <p class="title">Morada</p>
+            <p>Quinta da Granja,</p>
+            <p>R. Dom Carlos Mascarenhas, À-dos-Cãos, Loures,</p>
+            <p>2670-341, Portugal</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon icon-contato">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="text">
+            <p class="title">Contato</p>
+            <p>+35 927 416 138</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon icon-email">
+            <i class="fas fa-at"></i>
+          </div>
+          <div class="text">
+            <p class="title">Email</p>
+            <p>quintadagranja@gmail.com</p>
+          </div>
+        </div>
+        <div class="item">
+          <div class="icon icon-horario">
+            <i class="fas fa-clock"></i> <!-- Ícone de horário -->
+          </div>
+          <div class="text">
+            <p class="title">Horário</p>
+            <p>Seg - Sex: 09h00 - 15h00</p>
+            <p>Sábado e Domingo: Fechado</p>
+          </div>
+        </div>
+      </div>
+      <div class="mapa">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d994.2454301987228!2d-9.216370332361826!3d38.843275474156684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1ed32a780c1921%3A0x5ba8938e12642574!2sQuinta%20Pedag%C3%B3gica%20da%20Granja!5e1!3m2!1spt-PT!2spt!4v1739289540865!5m2!1spt-PT!2spt"
+          allowfullscreen="" loading="lazy">
+        </iframe>
+     </div>
+      </main>
+    </section>
+  </main>
 
-    <footer>
-        <p>&copy; 2025 Quinta da Granja - Todos os direitos reservados.</p>
-    </footer>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Localização</h3>
+         <p>📍 Quinta da Granja</p>
+         <p> R. Dom Carlos Mascarenhas, À-dos-Cãos, Loures, 2670-341, Portugal.</p>
+        <p>GPS - N38º50'35" W9º12'55"</p>
+      </div>
+      <div class="footer-column">
+        <h3>Contatos</h3>
+        <p>📧 Email: quintadagranja@gmail.com</p>
+        <p>📞 Telefone: +35 927 416 138</p>
+      </div>
+      <div class="footer-column social">
+        <h3>Redes Sociais</h3>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Quinta da Granja. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 </body>
 </html>
+
+<!----LINHAS Botões Menu---->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  let currentPage = window.location.pathname.split("/").pop();
+
+  let menuLinks = document.querySelectorAll(".nav-links li a");
+
+  menuLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>

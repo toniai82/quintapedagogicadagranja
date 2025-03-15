@@ -36,15 +36,16 @@ h2 {
       <img src="img/logot.png" alt="Logotipo da Quinta da Granja" class="logo">
     </div>
     <nav class="navbar">
-      <ul class="nav-links">
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
-        <li><a href="atividades.html">Atividades</a></li>
-        <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
-        <li><a href="galeria.html">Galeria</a></li>
-        <li><a href="contacto.html">Contatos</a></li>
-      </ul>
-    </nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="sobre.html">Sobre</a></li>
+          <li><a href="escolas.html">Escolas</a></li>
+          <li><a href="atividades.html">Atividades</a></li>
+          <li><a href="descobrirbrincar.html">Descobrir e Brincar</a></li>
+          <li><a href="galeria.html">Galeria</a></li>
+          <li><a href="contacto.html">Contatos</a></li>
+        </ul>
+      </nav>
     <div class="menu-toggle">
       <i class="fas fa-bars"></i>
     </div>
@@ -56,7 +57,7 @@ h2 {
 <div class="popup" id="popup">
   <span class="fechar" onclick="fecharPopup()">✖</span> <!-- Botão "X" -->
   <br>
-  <p>Descobre os nossos jogos! 🎉</p>
+  <p>  Descobre <br>os nossos jogos! 🎉</p>
   <br>
   <br>
   <button onclick="window.location.href='descobrirbrincar.html'">Brincar</button>
@@ -83,36 +84,36 @@ h2 {
 </div>
 
 <div class="container">
-  <h1>Atividades</h1>
+  <h1>Serviços e Atividades</h1>
   <br><br>
   <div class="cards">
-      <div class="card" onclick="window.location.href='atividades.html#visitas'">
+      <div class="card" onclick="window.location.href='escolas.html#visitas'">
           <div class="image-container img1">
               <img src="img/visita1.png" alt="visita">
           </div>
           <h2 class="titulo-visitas">Visitas</h2>
           <p>Escolas e Grupos</p>
       </div>
-      <div class="card" onclick="window.location.href='atividades.html#acampamentos'">
+      <div class="card" onclick="window.location.href='escolas.html#acampamentos'">
           <div class="image-container img2">
-              <img src="img/campismo.png" alt="Campismo">
+              <img src="img/trator.png" alt="quintaEscola">
           </div>
-          <h2 class="titulo-acampamentos">Acampamentos</h2>
-          <p>Grupos</p>
+          <h2 class="titulo-acampamentos">A Quinta na Escola</h2>
+          <p>Recebe uma visita das nossas mascotes</p>
       </div>
       <div class="card" onclick="window.location.href='atividades.html#workshops'">
-          <div class="image-container img3">
-              <img src="img/workshop.png" alt="workshop">
-          </div>
-          <h2 class="titulo-workshops">Workshops&Experiências</h2>
-          <p>Natureza e Artes</p>
-      </div>
+        <div class="image-container img3">
+            <img src="img/workshop.png" alt="workshop">
+        </div>
+        <h2 class="titulo-workshops">Workshops</h2>
+        <p>Natureza e Artes</p>
+    </div> 
       <div class="card" onclick="window.location.href='atividades.html#experiencias'">
         <div class="image-container img4">
-            <img src="img/agricultor1.png" alt="Experiencias">
+            <img src="img/campismo.png" alt="Campismo">
         </div>
-        <h2 class="titulo-experiencias">A Quinta na Escola</h2>
-        <p>Recebe uma visita das nossas mascotes</p>
+        <h2 class="titulo-experiencias">Acampamentos</h2>
+        <p>Grupos</p>
     </div>
   </div>
 </div>
@@ -153,10 +154,22 @@ h2 {
       document.querySelector('.nav-links').classList.toggle('active');
     });
   </script>
+  <!----LINHAS Botões Menu---->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  let currentPage = window.location.pathname.split("/").pop();
+
+  let menuLinks = document.querySelectorAll(".nav-links li a");
+
+  menuLinks.forEach(link => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
+});
+</script>
 </body>
 </html>
-
-<!----LINHAS Botões Menu---->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
   let currentPage = window.location.pathname.split("/").pop();

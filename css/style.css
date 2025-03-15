@@ -23,8 +23,87 @@ body {
   width: 100%;
   top: 0;
   left: 0;
+  transition: top 0.3s ease-in-out;
   z-index: 1000;
   gap: 50px; /* Espaço entre o logotipo e o menu */
+
+}
+
+/* ---- Estilos apenas para a página do quiz ---- */
+.quiz-page {
+  background: linear-gradient(to bottom, #0a1e32, #1b3b5f);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* Impede que elementos "fujam" da tela */
+}
+
+
+.quiz-container {
+  background: url('img/madeira-textura.jpg') no-repeat center center;
+  background-size: cover; /* Faz com que a textura se ajuste */
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  margin: 50px auto;
+  margin-top: 120px !important; /* Aumenta conforme necessário */
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); /* Borda dourada brilhante */
+  border: 4px solid rgba(255, 215, 0, 0.9); /* Borda dourada sólida */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Pequena sombra no texto */
+}
+.quiz-buttons {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-buttons button {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.quiz-buttons button:hover {
+  background: rgba(255, 69, 58, 0.8);
+}
+
+/* Quiz Efeito de escurecimento ao clicar numa resposta */
+.tela-escurecida {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+/* Quiz Efeito de relâmpago ao errar */
+.trovao {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(173, 216, 230, 0.6); /* Azul elétrico suave */
+  box-shadow: 0 0 60px rgba(173, 216, 230, 0.9); /* Glow forte ao redor */
+  z-index: -2; /* Coloca o efeito atrás de tudo */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .logo-container {
@@ -35,6 +114,11 @@ body {
 .logo {
   height: 90px; /* Aumentado para dar mais destaque */
   width: auto;
+  transition: transform 0.2s ease; /* Efeito suave de transição */
+}
+
+.logo:hover {
+  transform: scale(1.1); /* Aumenta em 10% o tamanho ao passar o mouse */
 }
 
 .navbar {
@@ -208,13 +292,12 @@ h2 {
   right: 10px;
 }
 
-/* ------------------- FICHEIRO ATIVIDADES ------------------- */
+/* ------------------- FICHEIRO ESCOLAS // ATIVIDADES ------------------- */
 #atividades {
   padding: 20px;
   border-radius: 10px;
   max-width: 900px;
   margin: 40px 0; /* Removido o auto para não centralizar */
-  line-height: 1.8;
   text-align: justify;
 }
 
@@ -244,9 +327,9 @@ h2 {
   text-align: justify; /* Justifica o texto */
   margin-top: -15px;
   color: #333;
-  line-height: 1.6; /* Ajusta o espaçamento entre as linhas */
-  word-wrap: break-word; /* Quebra palavras longas, se necessário */
-  white-space: normal; /* Garante que as quebras de linha aconteçam normalmente */
+  line-height: 1.4; /* Ajusta o espaçamento entre as linhas */
+  padding: 20 20px; /* Adiciona espaçamento à direita para equilíbrio */
+  max-width: 880px; /* Define um limite para o texto não esticar */
 }
 
 .activity-box {
@@ -299,20 +382,36 @@ h2 {
 html {
   scroll-behavior: smooth;
 }
-/*Fotos das atividades*/
-.activity-images img {
+
+/*--------------FOTOS do Ficheiro atividades------------*/
+/*WorkShops*/
+.activityworkshopum-images img {
   width: 450px; /* Ajuste conforme necessário */
   height: auto;
   border-radius: 10px;
   position: absolute; /* Posicionamento absoluto */
-  top: 690px; /* Ajuste este valor para subir a imagem */
-  margin-left: 950px;
-  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+  top: 500px; /* Ajuste este valor para subir a imagem */
+  margin-left: 995px;
+  transition: transform 0.5s ease, top 0.5s ease; 
 }
-.activity-images img:hover {
-  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+.activityworkshopum-images img:hover {
+  transform: scale(1.1); 
 }
 
+.activityworkshopdois-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 1240px; /* Ajuste este valor para subir a imagem */
+  margin-left: 995px;
+  transition: transform 0.5s ease, top 0.5s ease; 
+}
+.activityworkshopdois-images img:hover {
+  transform: scale(1.1); 
+}
+
+/*Acampamentos*/
 .activityaca-images img {
   width: 450px; /* Ajuste conforme necessário */
   height: auto;
@@ -320,10 +419,76 @@ html {
   position: absolute; /* Posicionamento absoluto */
   top: 1920px; /* Ajuste este valor para subir a imagem */
   margin-left: 995px;
-  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+  transition: transform 0.5s ease, top 0.5s ease; 
+}
+.activityaca-images img:hover {
+  transform: scale(1.1); 
 }
 
-.activityaca-images img:hover {
+.activityacaum-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 2450px; /* Ajuste este valor para subir a imagem */
+  margin-left: 995px;
+  transition: transform 0.5s ease, top 0.5s ease; 
+}
+.activityacaum-images img:hover {
+  transform: scale(1.1); 
+}
+/*-------------FOTOS do Ficheiro escolas-----------------*/
+/*Visitas*/
+.activityvisitasum-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 550px; /* Ajuste este valor para subir a imagem */
+  margin-left: 990px;
+  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+}
+.activityvisitasum-images img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+}
+
+.activityvisitasdois-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 900px; /* Ajuste este valor para subir a imagem */
+  margin-left: 990px;
+  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+}
+.activityvisitasdois-images img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+}
+
+/*Quinta na Escola*/
+.activityescolasum-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 1650px; /* Ajuste este valor para subir a imagem */
+  margin-left: 990px;
+  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+}
+.activityescolasum-images img:hover {
+  transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
+}
+
+.activityescolasdois-images img {
+  width: 450px; /* Ajuste conforme necessário */
+  height: auto;
+  border-radius: 10px;
+  position: absolute; /* Posicionamento absoluto */
+  top: 2000px; /* Ajuste este valor para subir a imagem */
+  margin-left: 990px;
+  transition: transform 0.5s ease, top 0.5s ease; /* Transição suave */
+}
+.activityescolasdois-images img:hover {
   transform: scale(1.1); /* Aumenta o tamanho da imagem quando o cursor está sobre ela */
 }
 /* ------------------- RESPONSIVIDADE ------------------- */
@@ -357,7 +522,7 @@ html {
   }
 }
 
-/*--------------- Estilos do Ovo -------------*/
+/*--------------- Estilos do Avatar -------------*/
 .ovo {
   position: fixed;
   top: -100px; /* Começa fora da tela */
@@ -384,65 +549,82 @@ html {
   }
 }
 
-/* POPUP do ovo */
+/* POPUP do Avatar */
 #popup {
   position: fixed;
-  bottom: 280px; /* Ajusta conforme necessário */
-  right: 110px;
-  width: 240px; /* Ajusta largura */
-  background: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente */
-  border-radius: 15px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 25px;
-  display: none;
+  bottom: 300px; /* Ajusta conforme necessário */
+  right: 15px;
+  width: 520px;
+  height: 300px;
+  background: url('../img/nuvem.png') no-repeat center;
+  background-size: contain; /* Ajusta a imagem dentro do balão */
+  background-color: transparent !important; /* Garante que não há fundo sólido */
+  box-shadow: none !important; /* Remove qualquer sombra */
+  filter: none !important; /* Remove filtros de sombra */
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   opacity: 0;
   transition: opacity 0.5s ease-in-out, bottom 0.4s ease-in-out;
-  text-align: center;
   z-index: 1002;
-  font-size: 19px;
 }
 
-/* Cauda do balão de fala */
-#popup::after {
-  content: "";
+/* Ajustar o texto dentro da nuvem */
+#popup p {
   position: absolute;
-  bottom: -17px;
-  right: 20px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 15px solid rgba(255, 255, 255, 0.9);
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  width: 80%; /* Para evitar que o texto saia da nuvem */
+  line-height: 1.4; /* Aumenta o espaço entre "Descobre" e "Nossos Jogos" */
+  margin-bottom: auto; /* Faz o texto ocupar o topo e empurra o botão para baixo */
+  padding-top: 20px;
+  text-align: center;
 }
+
 
 /* Botões do pop-up */
 #popup .popup-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 1opx;
 }
 
+/* Posicionar o botão DENTRO da nuvem */
 #popup button {
-  flex: 1;
-  margin: 0 5px;
-  padding: 5px 10px;
-  background-color: #f57c00;
-  color: white;
+  background-color: #ffcc00;
+  color: black;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.3s;
+  position: relative; /* Mantém o botão dentro da nuvem */
+  bottom: 0; /* Alinha corretamente */
+  left: auto;
+  transform: none;
+  margin-top: 110px; /* Faz o botão ficar no final da nuvem */
 }
+
 
 #popup button:hover {
-  background-color: #b55f08;
+  background-color: #e6b800;
 }
 
 .fechar {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 30px;
   font-size: 15px;
   cursor: pointer;
   color: #333;
@@ -686,6 +868,177 @@ h1 {
     cursor: pointer;
 }
 
+/* ---- COLORIR Melhoria na paleta de cores ---- */
+.paleta-cores .cor {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+.paleta-cores .cor:hover {
+  transform: scale(1.15);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estrutura principal do layout */
+.colorir-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap; /* Para adaptação responsiva */
+}
+
+/* Área do Canvas */
+.canvas-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Painel de Ferramentas */
+.painel-ferramentas {
+  width: 250px;
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Paleta de cores */
+.paleta-cores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.paleta-cores .cor {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.paleta-cores .cor:hover {
+  transform: scale(1.1);
+}
+
+/* Seletor de Espessura */
+#espessura {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Botões de Ação */
+.botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.botoes button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  color: white;
+  background: #3a5a40;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.botoes button:hover {
+  background: #85c227;
+  transform: scale(1.05);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
 
 
+/* Permite scroll no corpo da página */
+body {
+  overflow: auto;
+}
 
+/* Ajusta o container do colorir para evitar cortes */
+.colorir-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap; /* Permite que os elementos se ajustem em telas menores */
+  margin-top: 140px; /* Ajuste conforme necessário */
+}
+
+/* Garante que o canvas se adapta corretamente */
+.canvas-container canvas {
+  max-width: 100%; /* Evita que ultrapasse os limites do container */
+  height: auto;
+}
+
+/* Permite scroll no painel de ferramentas caso fique muito grande */
+.painel-ferramentas {
+  max-height: 500px; /* Ajusta conforme necessário */
+  overflow-y: auto; /* Adiciona scroll se necessário */
+  margin-top: 100px; /* Aumenta esse valor para descer mais */
+}
+
+/* Garante que a container principal permite scroll se necessário */
+.container {
+  overflow: auto;
+}
+/* PIRILAMPOS NO FUNDO DO QUIZ */
+.pirilampos-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none; /* Para não interferir com cliques */
+  z-index: -1; /* Fica atrás de tudo */
+}
+
+.pirilampo {
+  position: absolute;
+  width: 4px;
+  height: 2px;
+  background-color: rgba(173, 255, 47, 0.8); /* Cor verde-limão suave */
+  border-radius: 50%;
+  box-shadow: 0 0 12px 6px rgba(173, 255, 47, 0.8); /* Glow esverdeado */
+  animation: piscar 1.8s infinite alternate ease-in-out, flutuar 5s infinite ease-in-out;
+}
+
+@keyframes piscar {
+  0% { opacity: 0.1; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes flutuar {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+@keyframes tremor {
+  0% { transform: translate(0px, 0px); }
+  25% { transform: translate(-5px, 5px); }
+  50% { transform: translate(5px, -5px); }
+  75% { transform: translate(-5px, 5px); }
+  100% { transform: translate(0px, 0px); }
+}

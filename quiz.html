@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Quinta da Granja</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background: linear-gradient(to bottom, #0a1e32, #1b3b5f);
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .quiz-container {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 10px;
+      padding: 20px;
+      width: 80%;
+      max-width: 600px;
+      margin: 50px auto;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+    #options button, #next-question, #restart-quiz {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 18px;
+      background: #3b2e1e;
+      color: white;
+      border: 2px solid #c5a678;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    #options button:hover, #next-question:hover, #restart-quiz:hover {
+      background: #c5a678;
+      color: black;
+    }
+    #next-question, #restart-quiz {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <div class="pirilampos-container"></div>
+    <div class="trovao" id="trovaoEfeito"></div>
+    <div class="tela-escurecida" id="telaEscurecida"></div>
+    <audio id="somTrovao" src="sounds/trovao.mp3"></audio>
+    <audio id="somAmbiente" src="sounds/ambiente.mp3" loop autoplay></audio>
+  </header>
+  
+  <main class="quiz-container">
+    <h2>Animais e Natureza</h2>
+    <div id="quiz">
+      <p id="question-text">Carregando pergunta...</p>
+      <div id="options" class="options-container"></div>
+      <p id="feedback"></p>
+      <button id="next-question" style="display: none;" onclick="loadNextQuestion()">Próxima Pergunta</button>
+      <button id="restart-quiz" style="display: none;" onclick="restartQuiz()">Reiniciar Quiz</button>  
+      <!-- Botões fixos para sair e controlar o som -->
+      <div class="quiz-buttons">
+      <button id="exit-quiz" onclick="window.location.href='descobrirbrincar.html'">❌ Sair</button>
+      <button id="toggle-sound" onclick="toggleSound()">🔊</button>
+      </div>  
+      <p>Modjo: <span id="lives">3</span></p>
+      <p>QI: <span id="score">0</span></p>
+    </div>
+  </main>
+  
+  <script>
+    let questions = [
+      {
+        question: "Porque é que as galinhas põem ovos?",
+        options: ["Para fazer bolos", "Gostam de bitoque com ovo estrelado", "Para terem pintainhos", "As galinhas não põem ovos"],
+        correctAnswer: "Para terem pintainhos",
+        explanation: "As galinhas põem ovos como parte do seu ciclo reprodutivo."
+      },
+      {
+        question: "Porque é que os patos nadam tão bem?",
+        options: ["Porque armazenam ar no corpo", "Porque têm penas impermeáveis", "Porque possuem membranas interdigitais", "Porque os ossos são mais leves que os de outras aves"],
+        correctAnswer: "Porque possuem membranas interdigitais",
+        explanation: "Os patos têm membranas interdigitais entre os dedos, que aumentam a superfície de contato com a água, funcionando como remos naturais e permitindo que nadem de forma eficiente."
+      },
+      {
+        question: "Como dormem os cavalos?",
+        options: ["A fazer o pino", "Deitados", "A ver Netflix", "De pé"],
+        correctAnswer: "De pé",
+        explanation: "Os cavalos possuem um mecanismo especial nos tendões das patas traseiras, chamado aparato de sustentação passivo, que lhes permite bloquear as articulações relaxar os músculos sem cair e dormir de pé."
+      },
+      
+      {
+        question: "Porque é que as galinhas raspam o chão?",
+        options: ["Para marcar território", "Porque gostam de dançar", "Para procurar comida", "Para se esconderem"],
+        correctAnswer: "Para procurar comida",
+        explanation: "As galinhas raspam o chão com as patas para desenterrar insetos, sementes e outros alimentos escondidos na terra."
+      },
+      {
+        question: "Porque é que os burros são considerados teimosos?",
+        options: ["São muito preguiçosos", "Gostam de fazer as coisas à maneira deles", "São mais inteligentes e cautelosos", "Gostam de irritar as pessoas"],
+        correctAnswer: "São mais inteligentes e cautelosos",
+        explanation: "Os burros não são teimosos, mas sim muito cautelosos. Ao contrário dos cavalos, avaliam melhor os perigos antes de reagir, o que pode parecer teimosia."
+      },
+      {
+        question: "Como se chamam os coelhos bebés?",
+        options: ["Crias", "Leitões", "Gatinhos", "Cabritos"],
+        correctAnswer: "Crias",
+        explanation: "Os coelhos bebés chamam-se crias e nascem cegos, sem pelo e muito frágeis, dependendo completamente da mãe nos primeiros dias."
+      },
+      {
+        question: "Porque é que os porcos se rebolam na lama?",
+        options: ["Porque gostam de se sujar", "Para se refrescarem", "Para brincar", "Porque não conseguem ficar limpos"],
+        correctAnswer: "Para se refrescarem",
+        explanation: "Os porcos não transpiram como os humanos, então rebolam na lama para regular a temperatura corporal e proteger a pele do sol."
+      },
+      {
+        question: "Porque é que os cavalos têm cascos em vez de patas com dedos?",
+        options: ["Para correr mais rápido", "Para se defenderem melhor", "Porque perderam os dedos ao longo da evolução", "Para escalar montanhas"],
+        correctAnswer: "Porque perderam os dedos ao longo da evolução",
+        explanation: "Os cavalos descendem de ancestrais com vários dedos, mas ao longo da evolução, o seu corpo adaptou-se e apenas um grande casco permaneceu para suportar o peso e permitir corridas mais rápidas."
+      },
+      {
+        question: "Como é que os pirilampos produzem luz?",
+        options: ["Com eletricidade", "Através de magia", "Por uma reação química no corpo", "Com energia solar"],
+        correctAnswer: "Por uma reação química no corpo",
+        explanation: "Os pirilampos produzem luz através de um processo chamado bioluminescência, que ocorre devido a uma reação química entre a luciferina e o oxigénio no seu corpo."
+      },
+      {
+        question: "Qual destes animais pode dormir de olhos abertos?",
+        options: ["Galo", "Ovelha", "Coelho", "Pato"],
+        correctAnswer: "Pato",
+        explanation: "Os patos podem dormir com um olho aberto e metade do cérebro alerta para detectar predadores enquanto descansam."
+      },
+      {
+        question: "Porque é que os gatos domésticos caçam, mesmo sem fome?",
+        options: ["Para treinar as patas", "Por instinto natural", "Porque gostam de colecionar presas", "Para impressionar os donos"],
+        correctAnswer: "Por instinto natural",
+        explanation: "Os gatos mantêm o instinto de caça dos seus antepassados selvagens, por isso caçam mesmo quando não têm fome."
+      },
+      {
+        question: "Porque é que algumas galinhas põem ovos de cor diferente?",
+        options: ["Porque comem alimentos coloridos", "Depende da raça da galinha", "Porque são mais velhas", "Porque põem ovos ao sol"],
+        correctAnswer: "Depende da raça da galinha",
+        explanation: "A cor dos ovos varia conforme a raça da galinha. Algumas põem ovos brancos, outras castanhos, e algumas até azulados ou esverdeados, mas variações na alimentação também podem causar ligeiras alterações na pigmentação da casca."
+      },
+      {
+        question: "Porque é que as cabras conseguem escalar montanhas tão bem?",
+        options: ["Têm ventosas nos cascos", "São muito leves", "Os seus cascos têm um formato especial", "Usam a cauda para se equilibrar"],
+        correctAnswer: "Os seus cascos têm um formato especial",
+        explanation: "As cabras têm cascos com uma parte dura e resistente para agarrar superfícies rochosas e uma parte interna macia que lhes dá aderência, permitindo-lhes escalar com segurança."
+      },
+      {
+        question: "O que significa quando um cavalo levanta as orelhas?",
+        options: ["Está a dormir", "Está atento e curioso", "Está zangado", "Está doente"],
+        correctAnswer: "Está atento e curioso",
+        explanation: "Os cavalos comunicam muito através das orelhas. Quando as levantam para a frente, significa que estão atentos ao que se passa à sua volta."
+      },
+      {
+        question: "Porque é que os coelhos mexem tanto o nariz?",
+        options: ["Porque estão a farejar melhor o ambiente", "Para assustar predadores", "Para regular a temperatura", "Porque estão zangados"],
+        correctAnswer: "Porque estão a farejar melhor o ambiente",
+        explanation: "Os coelhos têm um olfato muito apurado. Ao mexerem o nariz rapidamente, conseguem captar mais odores do ambiente e perceber melhor o que se passa à sua volta."
+      },
+      {
+        question: "Porque é que os burros zurrem tão alto?",
+        options: ["Para comunicar a longas distâncias", "Porque gostam de cantar", "Para chamar os humanos", "Porque são animais muito barulhentos"],
+        correctAnswer: "Para comunicar a longas distâncias",
+        explanation: "Os burros zurrem para se comunicarem a grandes distâncias. O seu som pode ser ouvido a vários quilómetros, o que é útil para avisar outros burros ou alertar para perigos."
+      },
+      {
+        question: "Qual destes animais tem dentes que nunca param de crescer?",
+        options: ["Coelho", "Cavalo", "Porco", "Galo"],
+        correctAnswer: "Coelho",
+        explanation: "Os dentes dos coelhos crescem continuamente ao longo da vida, por isso precisam de roer madeira ou alimentos duros para os desgastar e evitar problemas de saúde."
+      },
+      {
+        question: "Porque é que os porcos têm um focinho achatado e forte?",
+        options: ["Para escavar a terra em busca de comida", "Para intimidar outros animais", "Porque comem muito", "Para refrescar o corpo"],
+        correctAnswer: "Para escavar a terra em busca de comida",
+        explanation: "O focinho dos porcos é muito forte e sensível, permitindo-lhes escavar o solo para encontrar raízes, tubérculos e pequenos insetos para comer."
+      },
+      {
+        question: "Qual destes insetos é conhecido por polinizar flores?",
+        options: ["Borboleta", "Mosca", "Abelha", "Formiga"],
+        correctAnswer: "Abelha",
+        explanation: "As abelhas são polinizadores essenciais para muitas plantas, pois transportam o pólen de uma flor para outra enquanto recolhem néctar."
+      },
+      {
+        question: "Porque é que os galos cantam ao amanhecer?",
+        options: ["Para acordar as pessoas", "Para marcar o território", "Porque têm fome", "Porque são noturnos"],
+        correctAnswer: "Para marcar o território",
+        explanation: "Os galos cantam ao amanhecer para marcar território e avisar outras aves da sua presença. Também podem cantar em outros momentos do dia para alertar sobre possíveis perigos."
+      },
+      {
+        question: "Porque é que os cavalos abanam a cauda constantemente?",
+        options: ["Para se refrescarem", "Para se comunicarem entre si", "Para afastar insetos", "Porque estão sempre nervosos"],
+        correctAnswer: "Para afastar insetos",
+        explanation: "Os cavalos abanam a cauda para afastar moscas e outros insetos que os picam. Em dias quentes, isso ajuda-os a evitar o desconforto causado pelos parasitas."
+      },
+      {
+        question: "O que acontece quando uma toupeira faz um monte de terra no chão?",
+        options: ["Está a construir um ninho", "Está a cavar túneis debaixo da terra", "Está a marcar território", "Está a chamar outras toupeiras"],
+        correctAnswer: "Está a cavar túneis debaixo da terra",
+        explanation: "As toupeiras vivem em túneis subterrâneos e, ao escavarem, empurram a terra para cima, formando pequenos montes no solo."
+      },
+      {
+        question: "Porque é que as ovelhas andam sempre em grupo?",
+        options: ["Porque gostam de companhia", "Para se protegerem de predadores", "Porque não sabem andar sozinhas", "Porque são treinadas para isso"],
+        correctAnswer: "Para se protegerem de predadores",
+        explanation: "As ovelhas são animais sociais e instintivamente permanecem em grupo para reduzir o risco de serem atacadas por predadores."
+      },
+      {
+        question: "Porque é que os coelhos têm orelhas tão compridas?",
+        options: ["Para captar sons à distância", "Para se refrescarem", "Para assustar predadores", "Porque ficam mais bonitos"],
+        correctAnswer: "Para captar sons à distância",
+        explanation: "Os coelhos têm uma audição muito sensível e as suas orelhas longas ajudam-nos a captar sons à distância, permitindo-lhes detetar predadores a tempo de fugir."
+      },
+      {
+        question: "Porque é que os mochos conseguem ver bem no escuro?",
+        options: ["Porque os seus olhos brilham", "Porque têm olhos grandes e sensíveis", "Porque emitem luz própria", "Porque dormem de dia"],
+        correctAnswer: "Porque têm olhos grandes e sensíveis",
+        explanation: "Os mochos têm olhos grandes e altamente sensíveis à luz, o que lhes permite ver claramente no escuro e caçar durante a noite."
+      },
+      {
+        question: "Porque é que os cães abanam a cauda quando estão felizes?",
+        options: ["Para equilibrar o corpo", "Para mostrar emoções", "Para afastar insetos", "Porque estão nervosos"],
+        correctAnswer: "Para mostrar emoções",
+        explanation: "Os cães usam a cauda para comunicar emoções, abanando-a quando estão felizes ou entusiasmados."
+      },
+      {
+        question: "Porque é que os patos conseguem flutuar na água?",
+        options: ["Porque têm penas impermeáveis", "Porque são muito leves", "Porque seguram a respiração", "Porque nadam constantemente"],
+        correctAnswer: "Porque têm penas impermeáveis",
+        explanation: "Os patos têm penas cobertas de uma substância oleosa que as torna impermeáveis, ajudando-os a flutuar e a manterem-se secos na água."
+      },
+      {
+        question: "Porque é que as abelhas dançam dentro da colmeia?",
+        options: ["Porque gostam de música", "Para comunicar onde está o néctar", "Para se aquecerem", "Para afastar intrusos"],
+        correctAnswer: "Para comunicar onde está o néctar",
+        explanation: "As abelhas usam uma dança especial chamada 'dança das abelhas' para indicar às suas companheiras a direção e distância das fontes de néctar."
+      },
+      {
+        question: "Porque é que os gatos ronronam?",
+        options: ["Porque estão felizes", "Porque têm fome", "Porque estão zangados", "Porque querem chamar a atenção"],
+        correctAnswer: "Porque estão felizes",
+        explanation: "Os gatos ronronam geralmente quando estão confortáveis e felizes, mas também podem fazê-lo para se acalmarem em momentos de stress."
+      },
+      {
+        question: "Porque é que os cães cheiram tudo quando passeiam?",
+        options: ["Porque gostam de cheiros fortes", "Porque estão a explorar o ambiente", "Porque têm fome", "Porque veem mal"],
+        correctAnswer: "Porque estão a explorar o ambiente",
+        explanation: "Os cães têm um olfato muito apurado e usam o cheiro para explorar o ambiente e obter informações sobre outros animais e pessoas."
+      },
+      {
+        question: "Porque é que os gansos voam em formação em V?",
+        options: ["Para descansar enquanto voam", "Para reduzir a resistência do ar", "Porque são organizados", "Porque o líder os obriga"],
+        correctAnswer: "Para reduzir a resistência do ar",
+        explanation: "Os gansos voam em formação em V para reduzir a resistência do ar e economizar energia durante longas migrações."
+      },
+      {
+        question: "Porque é que os patos abanam a cauda depois de sair da água?",
+        options: ["Para secar mais rápido", "Porque estão felizes", "Para espalhar a oleosidade das penas", "Porque estão com frio"],
+        correctAnswer: "Para espalhar a oleosidade das penas",
+        explanation: "Os patos abanam a cauda e espalham o óleo das suas glândulas para manter as penas impermeáveis e secas."
+    }
+      
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let lives = 3;
+    questions = questions.sort(() => Math.random() - 0.5);
+
+    function loadQuestion() {
+      document.getElementById("next-question").style.display = "none";
+      document.getElementById("restart-quiz").style.display = "none";
+      document.getElementById("feedback").textContent = "";
+      if (lives === 0 || currentQuestionIndex >= questions.length) {
+        document.getElementById("quiz").innerHTML = `<h3>Fim do jogo!</h3><p>Pontuação final: ${score}</p>`;
+        document.getElementById("restart-quiz").style.display = "block";
+        return;
+      }
+      
+      const questionData = questions[currentQuestionIndex];
+      let shuffledOptions = [...questionData.options].sort(() => Math.random() - 0.5);
+      let correctIndex = shuffledOptions.indexOf(questionData.correctAnswer);
+
+      document.getElementById("question-text").textContent = questionData.question;
+      const optionsContainer = document.getElementById("options");
+      optionsContainer.innerHTML = "";
+      
+      shuffledOptions.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.textContent = option;
+        button.onclick = () => {
+          checkAnswer(index, correctIndex, questionData.explanation);
+          document.getElementById("next-question").style.display = "block";
+        };
+        optionsContainer.appendChild(button);
+      });
+    }
+
+    function checkAnswer(selectedIndex, correctIndex, explanation) {
+  // Bloquear todas as respostas depois da escolha
+  let buttons = document.querySelectorAll("#options button");
+  buttons.forEach(button => {
+    button.disabled = true; // Desativa os botões
+    button.style.opacity = "0.6"; // Dá um efeito visual de desativado
+  });
+
+  let somAmbiente = document.getElementById("somAmbiente");
+if (somAmbiente.paused) {
+  somAmbiente.play().catch(() => console.log("O utilizador precisa interagir primeiro."));
+}
+
+  if (selectedIndex === correctIndex) {
+    score += 10;
+    document.getElementById("feedback").textContent = "✅ Resposta correta! " + explanation;
+
+    // Efeito visual: botão fica verde ao acertar
+    buttons[selectedIndex].style.backgroundColor = "rgba(34, 139, 34, 0.8)";
+    buttons[selectedIndex].style.boxShadow = "0px 0px 15px rgba(34, 255, 34, 0.9)"; // Glow verde
+  } else {
+    lives -= 1;
+    document.getElementById("feedback").textContent = "❌ Resposta errada! " + explanation;
+
+    // Efeito visual: botão fica vermelho ao errar
+    buttons[selectedIndex].style.backgroundColor = "rgba(178, 34, 34, 0.8)";
+    buttons[selectedIndex].style.boxShadow = "0px 0px 15px rgba(255, 34, 34, 0.9)"; // Glow vermelho
+
+    // Ativar o efeito de relâmpago apenas no fundo
+    let trovao = document.getElementById("trovaoEfeito");
+    trovao.style.opacity = "1";
+
+    setTimeout(() => {
+      trovao.style.opacity = "0";
+    }, 100); // Relâmpago rápido
+
+    // Tocar o som do trovão
+    let somTrovao = document.getElementById("somTrovao");
+    somTrovao.currentTime = 0;
+    somTrovao.play();
+
+    // Efeito de leve vibração no ecrã inteiro (inclui quiz)
+    document.body.style.animation = "tremor 0.2s ease-in-out";
+
+    setTimeout(() => {
+      document.body.style.animation = "";
+    }, 200);
+  }
+
+  document.getElementById("score").textContent = score;
+  document.getElementById("lives").textContent = lives;
+
+  if (lives === 0) {
+    endGame();
+  } else {
+    document.getElementById("next-question").style.display = "block";
+  }
+  
+}
+function endGame() {
+  document.getElementById("quiz").innerHTML = `
+    <h3>Fim do jogo!</h3>
+    <p>Pontuação final: ${score}</p>
+    <div class="quiz-buttons">
+      <button onclick="location.reload()">🔄 Recomeçar</button> 
+      <button onclick="window.location.href='descobrirbrincar.html'">❌ Sair</button>
+      <button id="toggle-sound" onclick="toggleSound()">🔊</button>
+    </div>
+  `;
+}
+
+function loadNextQuestion() {
+  document.getElementById("next-question").style.display = "none"; // Esconde o botão
+  currentQuestionIndex++;
+  loadQuestion();
+}
+
+function restartQuiz() {
+  currentQuestionIndex = 0;
+  score = 0;
+  lives = 3;
+  questions = questions.sort(() => Math.random() - 0.5);
+  document.getElementById("quiz").innerHTML = `
+    <p id="question-text">Carregando pergunta...</p>
+    <div id="options" class="options-container"></div>
+    <p id="feedback"></p>
+    <button id="next-question" style="display: none;" onclick="loadNextQuestion()">Próxima Pergunta</button>
+    <p>Neurónios: <span id="lives">3</span></p>
+    <p>Sinapses: <span id="score">0</span></p>
+  `;
+
+    // 🔹 Espera a renderização e só depois obtém os elementos
+    setTimeout(() => {
+    document.getElementById("next-question").style.display = "none";
+    document.getElementById("restart-quiz").style.display = "none";
+    loadQuestion();
+  }, 50); // Pequeno atraso para garantir que os elementos são criados
+
+  loadQuestion();
+}
+function toggleSound() {
+  let somAmbiente = document.getElementById("somAmbiente");
+  let soundButton = document.getElementById("toggle-sound");
+
+  if (somAmbiente.paused) {
+    somAmbiente.play().then(() => {
+      soundButton.textContent = "🔊";
+    }).catch(error => console.log("Erro ao tentar tocar som:", error)); 
+  } else {
+    somAmbiente.pause();
+    soundButton.textContent = "🔇";
+  }
+}
+
+    document.addEventListener("DOMContentLoaded", loadQuestion);
+  </script>
+  </script>
+  
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("somAmbiente").play().catch(() => {
+   console.log("Autoplay bloqueado, o utilizador precisa de interagir primeiro.");
+        });
+    const numPirilampos = 15; // Quantidade de pirilampos
+    const container = document.querySelector(".pirilampos-container");
+    const quizContainer = document.querySelector(".quiz-container");
+
+    for (let i = 0; i < numPirilampos; i++) {
+      let pirilampo = document.createElement("div");
+      pirilampo.classList.add("pirilampo");
+
+      // Define posição inicial aleatória FORA do painel do quiz
+      function definirPosicao() {
+        let posX = Math.random() * window.innerWidth;
+        let posY = Math.random() * window.innerHeight;
+
+        let quizRect = quizContainer.getBoundingClientRect();
+
+        // Evita sobreposição com o quiz
+        if (
+          posX > quizRect.left - 30 &&
+          posX < quizRect.right + 30 &&
+          posY > quizRect.top - 30 &&
+          posY < quizRect.bottom + 30
+        ) {
+          definirPosicao(); // Se sobrepõe, tenta de novo
+        } else {
+          pirilampo.style.left = `${posX}px`;
+          pirilampo.style.top = `${posY}px`;
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+  let somAmbiente = document.getElementById("somAmbiente");
+
+  // Tenta tocar automaticamente, mas sem forçar
+  somAmbiente.volume = 0.5; // Reduz o volume inicial para evitar bloqueios
+  somAmbiente.play().catch(() => {
+    console.log("Autoplay bloqueado, o utilizador precisa de interagir primeiro.");
+  });
+});
+      }
+
+      definirPosicao();
+
+      // Mudar posição a cada X segundos para simular voo
+      setInterval(() => {
+        definirPosicao();
+      }, Math.random() * 5000 + 4000); // Muda entre 4 a 9 segundos
+
+      // Duração e delay aleatórios para os efeitos de piscar
+      let duracaoPiscar = (Math.random() * 1.5 + 1) + "s";
+      let delayPiscar = Math.random() * 2 + "s";
+
+      pirilampo.style.animationDuration = `${duracaoPiscar}, 5s`;
+      pirilampo.style.animationDelay = `${delayPiscar}, 0s`;
+
+      container.appendChild(pirilampo);
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,3 +1,4 @@
+    let espessuraAtual = 5; // Espessura inicial do traço
 document.addEventListener("DOMContentLoaded", function () {
     const ovo = document.getElementById("ovo");
     const popup = document.getElementById("popup");
@@ -7,8 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
         popup.style.display = "block";
         popup.style.opacity = "1";
 
-        // Inicia o temporizador para fechar após 15 segundos
-        fecharTimeout = setTimeout(() => fecharPopup(), 15000);
+        // Inicia o temporizador para fechar após 60 segundos
+        fecharTimeout = setTimeout(() => fecharPopup(), 60000);
     });
 
     // Função para redirecionar
@@ -80,91 +81,142 @@ if (menuToggle && navLinks) {
     });
 }
 
-// ------------------ CORRIGIDO: Pintura sem cobrir linhas pretas ------------------
-const canvas = document.getElementById("canvas");
-const ctx = canvas?.getContext("2d");
-const img = document.getElementById("desenhoAnimal");
-let desenhando = false;
-let corAtual = "#ff0000";
+document.addEventListener("DOMContentLoaded", function () {
+    // ----------------- COLORIR COM SONS ----------------- //
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas?.getContext("2d");
+    const imgElement = document.getElementById("desenhoAnimal");
+    let desenhando = false;
+    let corAtual = "#ff0000";
+    let historicoDesenho = []; // Histórico para desfazer
 
-// Garantir que o canvas e imagem existem antes de executar o código
-if (canvas && ctx && img) {
-    // Carregar a imagem no canvas
+    // Lista de desenhos com sons
+    const desenhos = [
+        { img: "img/galinha_pintos.png", som: "sounds/galinha_pintos.mp3" },
+        { img: "img/pato.png", som: "sounds/pato.mp3" },
+        { img: "img/cabra.png", som: "sounds/cabra.mp3" },
+        { img: "img/porco.png", som: "sounds/porco.mp3" }
+    ];
+
+    let desenhoAtual = 0;
+    let audioElement = new Audio();
+    let somTocando = false;
+
     function carregarImagem() {
-        if (img.complete) {
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        imgElement.src = desenhos[desenhoAtual].img;
+        audioElement.src = desenhos[desenhoAtual].som;
+    
+        imgElement.onload = function () {
+            // **Ajusta automaticamente o tamanho do canvas ao tamanho da imagem**
+            canvas.width = imgElement.width;
+            canvas.height = imgElement.height;
+    
+            // Limpa o canvas antes de desenhar a nova imagem
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+            // Ajusta a imagem ao centro do canvas, mantendo a proporção correta
+            let proporcao = Math.min(canvas.width / imgElement.width, canvas.height / imgElement.height);
+            let novaLargura = imgElement.width * proporcao;
+            let novaAltura = imgElement.height * proporcao;
+            let x = (canvas.width - novaLargura) / 2;
+            let y = (canvas.height - novaAltura) / 2;
+    
+            // Desenha a imagem ajustada no canvas
+            ctx.drawImage(imgElement, x, y, novaLargura, novaAltura);
+    
+            // Limpa o histórico de desenho ao mudar de imagem
+            historicoDesenho = [];
+        };
+    }
+    
+    function selecionarCor(cor) {
+        corAtual = cor;
+        document.getElementById("corSelecionada").value = cor; // Atualiza o seletor de cor
+        console.log("Cor selecionada:", corAtual); // Para debug
+    }
+    
+    window.selecionarCor = selecionarCor; // Expõe a função globalmente
+
+    function guardarDesenho() {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png"); // Converte o desenho em PNG
+        link.download = "meu_desenho.png"; // Nome do ficheiro
+        link.click(); // Simula o clique para descarregar
+    }
+    window.guardarDesenho = guardarDesenho; // Expõe a função globalmente
+
+    function mudarDesenho(direcao) {
+        desenhoAtual = (desenhoAtual + direcao + desenhos.length) % desenhos.length;
+        carregarImagem();
+    }
+
+    function tocarSom() {
+        if (somTocando) {
+            audioElement.pause();
+            audioElement.currentTime = 0;
+            somTocando = false;
         } else {
-            img.onload = function () {
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            };
+            audioElement.loop = true;
+            audioElement.play();
+            somTocando = true;
         }
     }
-    window.onload = carregarImagem;
 
-    // Alterar cor
     document.getElementById("corSelecionada").addEventListener("input", (e) => {
         corAtual = e.target.value;
     });
 
-    // Controlar desenho
-    canvas.addEventListener("mousedown", () => desenhando = true);
+    document.getElementById("espessura").addEventListener("input", (e) => {
+        espessuraAtual = parseInt(e.target.value, 10);
+        console.log("Nova espessura:", espessuraAtual); // Para debug
+    });
+    
+
+    // Guardar o estado antes de pintar
+    canvas.addEventListener("mousedown", () => {
+        desenhando = true;
+        historicoDesenho.push(ctx.getImageData(0, 0, canvas.width, canvas.height)); // Salva o estado atual antes de pintar
+    });
+
     canvas.addEventListener("mouseup", () => desenhando = false);
     canvas.addEventListener("mousemove", desenhar);
 
+    document.getElementById("espessura").addEventListener("input", (e) => {
+        espessuraAtual = e.target.value;
+    });
+
     function desenhar(event) {
         if (!desenhando) return;
-
-        ctx.globalCompositeOperation = "multiply"; // Mantém as linhas visíveis
+    
+        ctx.globalAlpha = 0.8; // Torna a cor menos opaca para evitar escurecimento
+        ctx.globalCompositeOperation = "multiply"; // Mantém as linhas pretas visíveis
         ctx.fillStyle = corAtual;
         ctx.beginPath();
-        ctx.arc(event.offsetX, event.offsetY, 5, 0, Math.PI * 2);
+        ctx.arc(event.offsetX, event.offsetY, espessuraAtual / 2, 0, Math.PI * 2);
         ctx.fill();
+        
+        ctx.globalAlpha = 1.0; // Restaura a opacidade normal
         ctx.globalCompositeOperation = "source-over"; // Volta ao normal após a pintura
     }
 
-    // Apagar desenho mantendo a imagem original
-    function limparDesenho() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        carregarImagem(); // Redesenha a imagem original
-    }
-}
-
-// ------------------ CORRIGIDO: Som em loop e botão para parar ------------------
-let audio = null;
-let isPlaying = false;
-
-function tocarSom(animal) {
-    if (audio && !audio.paused) {
-        audio.pause();
-        audio.currentTime = 0;
-        isPlaying = false;
-    } else {
-        audio = new Audio(`sounds/${animal}.mp3`);
-        audio.loop = true;
-        audio.play();
-        isPlaying = true;
-    }
-}
-/*--------------------------------------------------------------------------------*/
-
-<script>
-    // Função que alterna a visibilidade do conteúdo
-    function toggleContent(activity) {
-        const content = document.querySelector(`.${activity}-info`);
-        const currentDisplay = content.style.display;
-
-        // Alternar entre mostrar e ocultar
-        if (currentDisplay === 'none' || currentDisplay === '') {
-            content.style.display = 'block';  // Exibe o conteúdo
+    function desfazer() {
+        if (historicoDesenho.length > 0) {
+            console.log("Desfazendo última ação...");
+            ctx.putImageData(historicoDesenho.pop(), 0, 0);
         } else {
-            content.style.display = 'none';   // Oculta o conteúdo
+            console.log("Nada para desfazer!");
         }
     }
 
-    // Aplica a função de "abrir/fechar" ao título
-    document.querySelectorAll('h2').forEach(title => {
-        title.addEventListener('click', function() {
-            toggleContent(this.id);
-        });
-    });
-</script>
+    function limparDesenho() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        carregarImagem();
+    }
+
+    window.onload = carregarImagem;
+    window.mudarDesenho = mudarDesenho;
+    window.tocarSom = tocarSom;
+    window.limparDesenho = limparDesenho;
+    window.desfazer = desfazer;
+});
+
